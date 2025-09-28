@@ -23,7 +23,6 @@ const style = {
 };
 
 function ConfigurationModal({ open, onClose, robot }) {
-  // Guard clause to prevent errors if robot is not yet defined
   if (!robot) {
     return null;
   }
@@ -55,7 +54,7 @@ function ConfigurationModal({ open, onClose, robot }) {
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>
         <Typography variant="h6" component="h2">
-          Configure Robot: {robot.name} {/* <-- Final change here */}
+          Configure Robot: {robot.name}
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField

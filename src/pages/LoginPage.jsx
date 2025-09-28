@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAuthStore } from "../store/authStore";
 import apiClient from "../api/axiosConfig";
 import {
@@ -36,10 +35,13 @@ function LoginPage() {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         height: "100vh",
-        backgroundColor: "#f0f2f5",
+        pl: "10%",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/loginPage.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Card sx={{ minWidth: 275, maxWidth: 400, p: 2 }}>
@@ -76,7 +78,18 @@ function LoginPage() {
                 {error}
               </Alert>
             )}
-            <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              fullWidth
+              sx={{
+                mt: 2,
+                backgroundColor: "#FFBF00",
+                "&:hover": {
+                  backgroundColor: "#EAA200",
+                },
+              }}
+            >
               Login
             </Button>
           </form>

@@ -36,7 +36,7 @@ function RobotCard({ robot }) {
             }}
           >
             <Typography variant="h6" component="div">
-              {robot.name} {/* <-- Updated from robot.robotId */}
+              {robot.name}
             </Typography>
             <Chip
               label={robot.status}
