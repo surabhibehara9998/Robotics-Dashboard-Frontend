@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useAuthStore } from "../store/authStore";
@@ -31,7 +32,8 @@ function DashboardPage() {
     socket.on("telemetry", (data) => {
       setRobots((prevRobots) => ({
         ...prevRobots,
-        [data.robotId]: data,
+        // 1. Use data.name as the key to store robot data
+        [data.name]: data,
       }));
     });
 
@@ -83,7 +85,8 @@ function DashboardPage() {
         )}
         <Grid container spacing={3}>
           {robotArray.map((robot) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={robot.robotId}>
+            // 2. Use the unique robot._id as the key for the list item
+            <Grid item xs={12} sm={6} md={4} lg={3} key={robot._id}>
               <RobotCard robot={robot} />
             </Grid>
           ))}

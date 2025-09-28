@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import {
   Modal,
@@ -21,7 +22,11 @@ const style = {
   p: 4,
 };
 
-function ConfigurationModal({ open, onClose, robotId }) {
+function ConfigurationModal({ open, onClose, robot }) {
+  // Guard clause to prevent errors if robot is not yet defined
+  if (!robot) {
+    return null;
+  }
   const [speed, setSpeed] = useState("");
   const [mode, setMode] = useState("");
   const [task, setTask] = useState("");
@@ -35,16 +40,14 @@ function ConfigurationModal({ open, onClose, robotId }) {
     const config = { speed: Number(speed), mode, task };
 
     try {
-      await apiClient.put(`/robots/${robotId}/config`, { config });
+      await apiClient.put(`/robots/${robot._id}/config`, { config });
       setMessage("Configuration updated successfully!");
       setTimeout(() => {
         onClose();
         setMessage("");
       }, 1500);
     } catch (err) {
-      setError(
-        err.response?.data?.message || "Failed to update configuration."
-      );
+      setError(err.response?.data?.error || "Failed to update configuration.");
     }
   };
 
@@ -52,7 +55,7 @@ function ConfigurationModal({ open, onClose, robotId }) {
     <Modal open={open} onClose={onClose}>
       <Box sx={style}>
         <Typography variant="h6" component="h2">
-          Configure Robot: {robotId}
+          Configure Robot: {robot.name} {/* <-- Final change here */}
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField

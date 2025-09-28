@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardContent,
@@ -36,7 +36,7 @@ function RobotCard({ robot }) {
             }}
           >
             <Typography variant="h6" component="div">
-              {robot.robotId}
+              {robot.name} {/* <-- Updated from robot.robotId */}
             </Typography>
             <Chip
               label={robot.status}
@@ -60,15 +60,20 @@ function RobotCard({ robot }) {
           </Box>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={() => setIsModalOpen(true)}>
-            Configure
+          <Button
+            size="small"
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
+          >
+            CONFIGURE
           </Button>
         </CardActions>
       </Card>
       <ConfigurationModal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        robotId={robot.robotId}
+        robot={robot}
       />
     </>
   );
